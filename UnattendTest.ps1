@@ -98,19 +98,6 @@ $UnattendXml = @'
                     <Description>OSDCloud Specialize</Description>
                     <Path>Powershell -ExecutionPolicy Bypass -Command Invoke-OSDSpecialize -Verbose</Path>
                 </RunSynchronousCommand>
-
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>2</Order>
-                    <Description>OSDCloud Specialize</Description>
-                    <Path>Powershell -ExecutionPolicy Bypass -Command Invoke-OSDSpecialize -Verbose</Path>
-                </RunSynchronousCommand>
-
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>3</Order>
-                    <Description>OSDCloud Specialize</Description>
-                    <Path>Powershell -ExecutionPolicy Bypass -Command Invoke-OSDSpecialize -Verbose</Path>
-                </RunSynchronousCommand>
-            </RunSynchronous>
         </component>
     </settings>
     <settings pass="oobeSystem">
@@ -179,7 +166,7 @@ PowerShell -NoL -Com Set-ExecutionPolicy RemoteSigned -Force
 Set Path = %PATH%;C:\Program Files\WindowsPowerShell\Scripts
 REM Start /Wait PowerShell -NoL -C Install-Module AutopilotOOBE -Force -Verbose
 Start /Wait PowerShell -NoL -C Install-Module OSD -Force -Verbose
-Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/MyOLC/OSDCloud/Main/Set-KeyboardLanguage.ps1?token=GHSAT0AAAAAAB5VUKB6SN6GVYUA6KTIGSNUY66WNYQ
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/JorgaWetzel/OSDCloudMyOLC/Main/Set-KeyboardLanguage.ps1
 Start /Wait PowerShell -NoL -C Start-OOBEDeploy
 REM Start /Wait PowerShell -NoL -C Restart-Computer -Force
 '@
@@ -190,8 +177,8 @@ $AutopilotCMD | Out-File -FilePath 'C:\Windows\System32\Autopilot.cmd' -Encoding
 #================================================
 Write-Host -ForegroundColor Green "Create C:\Windows\Setup\Scripts\SetupComplete.cmd"
 $SetupCompleteCMD = @'
-RD C:\OSDCloud\OS /S /Q
-RD C:\Drivers /S /Q
+rem RD C:\OSDCloud\OS /S /Q
+rem RD C:\Drivers /S /Q
 '@
 $SetupCompleteCMD | Out-File -FilePath 'C:\Windows\Setup\Scripts\SetupComplete.cmd' -Encoding ascii -Force
 
