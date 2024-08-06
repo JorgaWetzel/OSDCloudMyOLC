@@ -24,6 +24,13 @@ Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.g
 Write-Host -ForegroundColor DarkGray "Executing Cleanup Script"
 Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/JorgaWetzel/OSDCloudMyOLC/Main/CleanUp.ps1" -Wait
 
+Write-Host -ForegroundColor DarkGray "execute Provisioning script until next logon"
+$regPath = "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+$regName = "execute_provisioning"
+$regType = "REG_SZ"
+$regValue = "cmd /c powershell.exe -ExecutionPolicy Bypass -File C:\Windows\Setup\Scripts\provisioning.ps1"
+Start-Process -FilePath reg -ArgumentList "add `"$regPath`" /v `"$regName`" /t `"$regType`" /d `"$regValue`" /f" -NoNewWindow -Wait
+
 # Cleanup scheduled Tasks
 Write-Host -ForegroundColor DarkGray "Unregistering Scheduled Tasks"
 Unregister-ScheduledTask -TaskName "Scheduled Task for SendKeys" -Confirm:`$false
