@@ -1,5 +1,3 @@
-Write-Output 'Starting SetupComplete HOPE Script Process'
-Write-Output 'iex (irm hope.garytown.com)'
 #if ((Test-WebConnection) -ne $true){Write-error "No Internet, Sleeping 2 Minutes" ; start-sleep -seconds 120}'
 #iex (irm https://raw.githubusercontent.com/JorgaWetzel/garytown/master/Dev/CloudScripts/oneICT2.ps1)'
 
